@@ -9,7 +9,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 
 /**
  * 启动类
- *
+ *      数据在com.online.taxi.service.impl.InfoUploaderImpl里通过HTTP上报到监管部门
  * @date 2018/8/22
  */
 @SpringBootApplication
