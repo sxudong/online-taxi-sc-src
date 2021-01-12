@@ -4,6 +4,9 @@ import com.online.taxi.consts.Const;
 import com.online.taxi.proto.MessageProto;
 import com.online.taxi.user.User;
 import io.netty.channel.Channel;
+import io.netty.channel.group.ChannelGroup;
+import io.netty.channel.group.DefaultChannelGroup;
+import io.netty.util.concurrent.GlobalEventExecutor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
@@ -18,6 +21,8 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class ServerContext {
     private static AtomicInteger ID = new AtomicInteger(100);
     private ConcurrentHashMap<String, User> users = new ConcurrentHashMap<>();
+    // 我xf-driver用Netty自带的ChannelGroup管理用户，比用ConcurrentHashMap更方便管理
+    //public static ChannelGroup users = new DefaultChannelGroup(GlobalEventExecutor.INSTANCE);
 
     public int getNewId() {
         return ID.incrementAndGet();

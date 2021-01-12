@@ -23,12 +23,20 @@ public class DispatchHandler<P extends User> extends SimpleChannelInboundHandler
         serverContext.removeUser(ctx.channel());
     }
 
+    /**
+     * 发生异常，从 serverContext.users 中移除
+     */
     @Override
     public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
         super.exceptionCaught(ctx, cause);
         serverContext.removeUser(ctx.channel());
     }
 
+    /**
+     * 当客户端连接服务端之后（打开连接）
+     * 获取客户端的 channel，并且放到 serverContext.users 中去进行管理
+     * 覆盖handlerAdded()方法，可以省去“super.channelRegistered(ctx);”这一段代码
+     */
     @Override
     public void channelRegistered(ChannelHandlerContext ctx) throws Exception {
         super.channelRegistered(ctx);
